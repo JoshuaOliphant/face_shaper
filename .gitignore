@@ -1,13 +1,57 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+# Version control
+.git
+.gitignore
+.gitattributes
 
-# Virtual environments
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[cod]
+*$py.class
+.pytest_cache
+.coverage
+htmlcov/
+
+# Environment
+.env
 .venv
+env/
+venv/
+ENV/
+.uv/
 
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+README.md
+LICENSE
+tests/
+docs/
+*.log
+
+# Development
+.ruff_cache/
 .mypy_cache/
-.ropeproject
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+
+.ropeproject/
