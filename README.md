@@ -1,16 +1,45 @@
 # Face Shape Analyzer
 
-Face Shape Analyzer is a web application that uses AI to analyze facial features and recommend hairstyles based on face shape. The application leverages Anthropic's Claude Vision API for accurate face shape detection and provides personalized hairstyle recommendations.
+Face Shape Analyzer is a web application that uses AI to analyze facial features and recommend hairstyles based on face shape. The application leverages Anthropic's Claude Vision API for accurate face shape detection and provides personalized hairstyle recommendations for both men and women.
 
 ## Features
 
 - 📸 Upload and analyze face photos
-- 🔍 AI-powered face shape detection
-- 💇‍♂️ Personalized hairstyle recommendations
+- 🔍 AI-powered gender and face shape detection
+- 💇‍♂️ Gender-specific face shape analysis
+- 💇‍♀️ Personalized hairstyle recommendations
 - 📊 Confidence scoring for analysis
 - 🎯 Detailed facial characteristics breakdown
 - ⚡ Real-time analysis with HTMX
 - 📱 Responsive design with Tailwind CSS
+
+## Face Shape Analysis
+
+The application analyzes face shapes based on established criteria from professional sources:
+
+### Men's Face Shapes
+Our male face shape analysis criteria are based on the professional guidelines from [Goodman's Barber Lounge](https://goodmansbarberlounge.com/blog/mens-hairstyles-by-face-shape/), which identifies seven primary face shapes:
+
+1. Oval Face Shape
+2. Square Face Shape
+3. Heart Face Shape
+4. Round Face Shape
+5. Triangle Face Shape
+6. Oblong/Rectangle Face Shape
+7. Diamond Face Shape
+
+### Women's Face Shapes
+Our female face shape analysis criteria are based on the comprehensive guide from [Headcurve](https://headcurve.com/hair/face-shapes/), which identifies nine distinct face shapes:
+
+1. Round Face Shape
+2. Oval Face Shape
+3. Inverted Triangle Face Shape
+4. Diamond Face Shape
+5. Triangle Face Shape
+6. Rectangle Face Shape
+7. Square Face Shape
+8. Heart Face Shape
+9. Oblong Face Shape
 
 ## Technology Stack
 
@@ -105,41 +134,12 @@ http://127.0.0.1:8000
 1. Visit the home page
 2. Click the upload button or drag and drop a photo
 3. Wait for the AI analysis to complete
-4. View your face shape analysis and hairstyle recommendations
-
-## Face Shapes Analyzed
-
-The application can detect and analyze seven different face shapes:
-
-1. **Oval Face Shape**
-   - Longer than wide across cheekbones and forehead
-   - Forehead slightly wider than jawline
-   - Generally rounded jawline
-
-2. **Square Face Shape**
-   - Similar measurements in height and width
-   - Sharp, angular curves rather than soft edges
-
-3. **Heart Face Shape**
-   - Forehead dramatically wider than jawline
-   - Jawline may be pointy, angular, or round
-
-4. **Round Face Shape**
-   - Width of cheekbones equals face length
-   - Soft, curved chin and hairline
-
-5. **Triangle Face Shape**
-   - Wider jawline than cheekbones
-   - Narrowest at forehead
-
-6. **Oblong/Rectangle Face Shape**
-   - Longer than wide
-   - Similar width at forehead, cheekbones, and jawline
-
-7. **Diamond Face Shape**
-   - Long face with angular features
-   - Cheekbones are widest part
-   - Narrow forehead and jawline
+4. View your:
+   - Detected gender
+   - Face shape analysis
+   - Confidence score
+   - Key characteristics
+   - Personalized hairstyle recommendations
 
 ## API Endpoints
 
@@ -167,23 +167,24 @@ To contribute to the project:
 
 ## Limitations
 
-- Men's faces only
 - Requires clear, front-facing photos
 - Good lighting recommended
 - Face should not be obscured by accessories
 - Maximum file size: 10MB
 - Supported formats: JPG, PNG, GIF
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Acknowledgments
 
+- [Goodman's Barber Lounge](https://goodmansbarberlounge.com/) for male face shape analysis criteria
+- [Headcurve](https://headcurve.com/) for female face shape analysis criteria
 - Anthropic for the Claude Vision API
 - FastAPI team for the excellent framework
 - HTMX team for simplified frontend interactions
 - Tailwind CSS team for the styling framework
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Support
 
