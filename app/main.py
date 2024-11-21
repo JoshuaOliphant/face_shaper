@@ -27,19 +27,31 @@ async def home(request: Request):
         "index.html",
         {
             "request": request,
-            "settings": settings  # Also pass settings directly to the template
+            "settings": settings
         }
     )
 
 @app.post("/analyze")
 async def analyze_face(request: Request, file: UploadFile = File(...)):
     """Analyze uploaded face image and return results."""
+    if not file.content_type.startswith('image/'):
+        raise HTTPException(status_code=400, detail="File must be an image")
+
     try:
         # Read the image file
         image_bytes = await file.read()
 
+        if len(image_bytes) > 10 * 1024 * 1024:  # 10MB limit
+            raise HTTPException(status_code=400, detail="File size too large. Maximum size is 10MB")
+
         # Get analysis from Claude Vision API
         analysis_result = await claude_service.analyze_image(image_bytes)
+
+        if analysis_result.get("face_shape") == "error":
+            raise HTTPException(
+                status_code=400,
+                detail=analysis_result["characteristics"][0] if analysis_result["characteristics"] else "Unknown error occurred"
+            )
 
         # Return the analysis results partial
         return templates.TemplateResponse(
@@ -47,12 +59,15 @@ async def analyze_face(request: Request, file: UploadFile = File(...)):
             {
                 "request": request,
                 "settings": settings,
+                "gender": analysis_result["gender"],
                 "face_shape": analysis_result["face_shape"],
                 "confidence": analysis_result["confidence"],
                 "characteristics": analysis_result["characteristics"],
                 "recommendations": analysis_result["recommendations"]
             }
         )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

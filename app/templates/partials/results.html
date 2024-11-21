@@ -2,10 +2,19 @@
     <h2 class="text-2xl font-semibold mb-6">Analysis Results</h2>
 
     <div class="space-y-6">
+        <!-- Gender -->
+        <div class="border-b pb-4">
+            <span
+                class="inline-flex items-center rounded-md {% if gender == 'female' %}bg-pink-50 text-pink-700 ring-pink-600/20{% else %}bg-blue-50 text-blue-700 ring-blue-600/20{% endif %} px-2 py-1 text-xs font-medium ring-1 ring-inset"
+            >
+                {{ gender|title }}
+            </span>
+        </div>
+
         <!-- Face Shape -->
         <div>
             <h3 class="text-lg font-medium text-gray-900">Face Shape</h3>
-            <p class="text-gray-700 mt-1">{{ face_shape }}</p>
+            <p class="text-gray-700 mt-1">{{ face_shape|title }}</p>
             <p class="text-sm text-gray-500 mt-1">
                 Confidence: {{ "%.0f"|format(confidence * 100) }}%
             </p>
@@ -33,6 +42,21 @@
                 <li>{{ style }}</li>
                 {% endfor %}
             </ul>
+        </div>
+
+        <!-- Tips -->
+        <div class="mt-6 bg-gray-50 rounded-lg p-4">
+            <h4 class="text-sm font-medium text-gray-900">Professional Tip</h4>
+            <p class="text-sm text-gray-600 mt-1">
+                {% if confidence >= 0.8 %} These recommendations are highly
+                confident based on your facial features. Consider consulting
+                with a professional stylist to perfectly execute these styles.
+                {% elif confidence >= 0.5 %} While these recommendations should
+                work well for your face shape, consider trying variations to
+                find what works best for you. {% else %} For more accurate
+                recommendations, try uploading a photo that is: • Front-facing •
+                Well-lit • Without accessories covering your face {% endif %}
+            </p>
         </div>
     </div>
 </div>
