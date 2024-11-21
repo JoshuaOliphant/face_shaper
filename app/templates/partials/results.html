@@ -1,0 +1,38 @@
+<div class="bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-semibold mb-6">Analysis Results</h2>
+
+    <div class="space-y-6">
+        <!-- Face Shape -->
+        <div>
+            <h3 class="text-lg font-medium text-gray-900">Face Shape</h3>
+            <p class="text-gray-700 mt-1">{{ face_shape }}</p>
+            <p class="text-sm text-gray-500 mt-1">
+                Confidence: {{ "%.0f"|format(confidence * 100) }}%
+            </p>
+        </div>
+
+        <!-- Characteristics -->
+        <div>
+            <h3 class="text-lg font-medium text-gray-900">
+                Key Characteristics
+            </h3>
+            <ul class="list-disc pl-5 text-gray-700 mt-2">
+                {% for characteristic in characteristics %}
+                <li>{{ characteristic }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Recommendations -->
+        <div>
+            <h3 class="text-lg font-medium text-gray-900">
+                Recommended Hairstyles
+            </h3>
+            <ul class="list-disc pl-5 text-gray-700 mt-2">
+                {% for style in recommendations %}
+                <li>{{ style }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

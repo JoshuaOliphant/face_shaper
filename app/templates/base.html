@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ settings.app_name }}</title>
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Loading indicator styles -->
+        <style>
+            .htmx-indicator {
+                display: none;
+            }
+            .htmx-request .htmx-indicator {
+                display: inline;
+            }
+            .htmx-request.htmx-indicator {
+                display: inline;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <nav class="bg-white shadow-lg">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex justify-between">
+                    <div class="flex space-x-7">
+                        <div>
+                            <a href="/" class="flex items-center py-4 px-2">
+                                <span
+                                    class="font-semibold text-gray-500 text-lg"
+                                >
+                                    {{ settings.app_name }}
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container mx-auto px-4 py-8">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="bg-white shadow-lg mt-8">
+            <div class="container mx-auto px-4 py-4 text-center text-gray-600">
+                <p>&copy; 2024 {{ settings.app_name }}. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
+</html>

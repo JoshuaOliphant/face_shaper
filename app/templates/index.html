@@ -1,0 +1,106 @@
+{% extends "base.html" %} {% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">
+            Face Shape Analyzer
+        </h1>
+        <p class="text-gray-600">
+            Upload a photo to analyze your face shape and get personalized
+            hairstyle recommendations
+        </p>
+    </div>
+
+    <!-- Upload Form -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <form
+            hx-post="/analyze"
+            hx-encoding="multipart/form-data"
+            hx-target="#results"
+            class="space-y-4"
+        >
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8">
+                <div class="space-y-4 text-center">
+                    <input
+                        type="file"
+                        name="file"
+                        id="file-input"
+                        accept="image/*"
+                        class="hidden"
+                        required
+                    />
+                    <label for="file-input" class="cursor-pointer">
+                        <div class="space-y-2">
+                            <div class="mx-auto h-12 w-12 text-gray-400">
+                                <!-- Heroicon name: outline/camera -->
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                    />
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="text-gray-600">
+                                <span class="text-blue-600 hover:text-blue-700"
+                                    >Upload a photo</span
+                                >
+                                <p class="text-xs text-gray-500 mt-1">
+                                    PNG, JPG, GIF up to 10MB
+                                </p>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Preview Image -->
+            <div id="preview-container" class="hidden">
+                <img id="preview" class="mx-auto max-h-64 rounded-lg" />
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+            >
+                <span class="htmx-indicator"> Analyzing... </span>
+                <span class="htmx-default"> Analyze Face Shape </span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="mt-8"></div>
+</div>
+
+<script>
+    // Preview uploaded image
+    document
+        .getElementById("file-input")
+        .addEventListener("change", function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById("preview");
+                    preview.src = e.target.result;
+                    document
+                        .getElementById("preview-container")
+                        .classList.remove("hidden");
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+</script>
+{% endblock %}
